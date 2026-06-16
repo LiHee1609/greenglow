@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GreenGlow - Mỹ Phẩm Thuần Chay</title>
   <meta name="description" content="GreenGlow - Mỹ phẩm thuần chay với phong cách tinh giản, hiện đại và thân thiện với làn da." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --green-dark: #1f4d3a;
@@ -140,7 +141,7 @@
     }
 
     .cart-button {
-background: var(--green-dark);
+      background: var(--green-dark);
       color: var(--white);
       border: none;
       padding: 12px 18px;
@@ -161,8 +162,13 @@ background: var(--green-dark);
       align-items: center;
     }
 
-    .hero-card,
-    .glass-card {
+    @media (max-width: 768px) {
+      .hero-grid, .about-grid, .checkout-grid, .policy-grid, .contact-grid, .product-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .hero-card, .glass-card {
       background: rgba(255, 255, 255, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.7);
       box-shadow: var(--shadow);
@@ -202,6 +208,7 @@ background: var(--green-dark);
       font-size: 15px;
       font-weight: 600;
       transition: 0.25s ease;
+      text-align: center;
     }
 
     .btn-primary {
@@ -215,52 +222,24 @@ background: var(--green-dark);
       background: #183c2d;
     }
 
-    .btn-secondary {
-      background: var(--white);
-      color: var(--green-dark);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-    }
-
     .hero-side {
-      padding: 26px;
+      padding: 10px;
     }
 
     .hero-visual {
       border-radius: 24px;
-      min-height: 420px;
-      background:
-        linear-gradient(160deg, rgba(246,241,232,0.95), rgba(255,255,255,0.9)),
-        radial-gradient(circle at top right, rgba(63,111,88,0.18), transparent 38%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
       border: 1px solid var(--border);
     }
 
-    .hero-visual .placeholder {
-      color: var(--green-dark);
+    .hero-visual img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
     }
 
-    .hero-visual h3 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .hero-visual p {
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    .about-grid,
-    .checkout-grid,
-    .policy-grid,
-    .contact-grid {
+    .about-grid, .checkout-grid, .policy-grid, .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
@@ -292,7 +271,7 @@ background: var(--green-dark);
 
     .feature-item {
       padding: 16px;
-border-radius: var(--radius-md);
+      border-radius: var(--radius-md);
       background: #f8faf7;
       border: 1px solid var(--border);
     }
@@ -320,15 +299,19 @@ border-radius: var(--radius-md);
     }
 
     .product-image {
-      height: 240px;
-      background: linear-gradient(180deg, #f7f3ea 0%, #eef5ef 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--green-soft);
-      font-weight: 700;
-      padding: 20px;
-      text-align: center;
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.3s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
     }
 
     .product-content {
@@ -340,21 +323,22 @@ border-radius: var(--radius-md);
     }
 
     .product-content h3 {
-      font-size: 22px;
+      font-size: 20px;
       color: var(--green-dark);
     }
 
     .price {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       color: var(--green-dark);
     }
 
     .product-content p {
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
     }
 
+    /* Giỏ hàng ẩn hiện side panel */
     .cart-panel {
       position: fixed;
       top: 0;
@@ -362,7 +346,7 @@ border-radius: var(--radius-md);
       width: 380px;
       max-width: 100%;
       height: 100vh;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(18px);
       box-shadow: -10px 0 30px rgba(0, 0, 0, 0.12);
       padding: 24px;
@@ -381,11 +365,13 @@ border-radius: var(--radius-md);
       justify-content: space-between;
       align-items: center;
       margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
     }
 
     .cart-header h3 {
       color: var(--green-dark);
-      font-size: 24px;
+      font-size: 22px;
     }
 
     .close-cart {
@@ -409,15 +395,26 @@ border-radius: var(--radius-md);
       border-radius: 16px;
       padding: 14px;
       background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .cart-item h4 {
       color: var(--green-dark);
-      margin-bottom: 4px;
+      font-size: 15px;
     }
 
     .cart-item p {
       color: var(--muted);
+      font-size: 13px;
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #c94c4c;
+      cursor: pointer;
       font-size: 14px;
     }
 
@@ -427,28 +424,24 @@ border-radius: var(--radius-md);
     }
 
     .cart-total {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       color: var(--green-dark);
       margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
     }
 
     .empty-cart {
       color: var(--muted);
       text-align: center;
-      padding: 30px 10px;
+      padding: 40px 10px;
     }
 
-    .checkout-form,
-    .payment-methods,
-    .policy-box,
-    .contact-box {
+    .form-group {
       display: grid;
-      gap: 16px;
-    }
-.form-group {
-      display: grid;
-      gap: 8px;
+      gap: 6px;
+      margin-bottom: 14px;
     }
 
     .form-group label {
@@ -457,46 +450,339 @@ border-radius: var(--radius-md);
       font-size: 14px;
     }
 
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%;
-      padding: 14px 16px;
-      border-radius: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
       border: 1px solid var(--border);
       outline: none;
-      font-size: 15px;
-      background: #fff;
-    }
-
-    .form-group textarea {
-      min-height: 110px;
-      resize: vertical;
+      font-size: 14px;
     }
 
     .payment-option {
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 14px;
       background: #fff;
+      margin-bottom: 10px;
     }
 
-    .payment-option strong {
-      display: block;
-      margin-bottom: 6px;
+    .payment-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
       color: var(--green-dark);
+      cursor: pointer;
     }
 
-    .payment-note {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .qr-placeholder {
-      border: 2px dashed rgba(31, 77, 58, 0.25);
-      border-radius: 18px;
-      padding: 20px;
+    .qr-area {
+      margin-top: 12px;
+      padding: 14px;
+      border: 2px dashed rgba(31, 77, 58, 0.2);
+      border-radius: 12px;
+      background: #fafcf9;
       text-align: center;
-      color: var(--muted);
-      background: #fafcf8;
-      marg
+      display: none;
+    }
+
+    .qr-area img {
+      width: 160px;
+      height: 160px;
+      margin: 10px auto;
+    }
+
+    .contact-icons a {
+      font-size: 28px;
+      color: var(--green-dark);
+      margin-right: 15px;
+      transition: 0.3s;
+    }
+
+    .contact-icons a:hover {
+      color: var(--green-soft);
+    }
+
+    footer {
+      background: var(--green-dark);
+      color: #e2ebe7;
+      padding: 40px 0;
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <div class="brand-logo">
+          <img src="images/logo.png" alt="GreenGlow" onerror="this.src='https://placehold.co/100x100?text=GG'">
+        </div>
+        <span>GreenGlow</span>
+      </a>
+      <div class="nav-links">
+        <a href="#products">Sản Phẩm</a>
+        <a href="#about">Về Brand</a>
+        <a href="#news">Tin Tức</a>
+        <a href="#policy">Chính Sách</a>
+        <a href="#checkout">Thanh Toán</a>
+      </div>
+      <button class="cart-button" onclick="toggleCart(true)">
+        <i class="fas fa-shopping-bag"></i> (<span id="cart-btn-count">0</span>)
+      </button>
+    </div>
+  </header>
+
+  <section class="hero container">
+    <div class="hero-grid">
+      <div class="hero-card">
+        <span class="badge">100% Vegan & Cruelty-Free</span>
+        <h1>Thuần chay, Tinh tế, Lành tính.</h1>
+        <p>GreenGlow đồng hành cùng hành trình nuôi dưỡng làn da khỏe mạnh từ sâu bên trong bằng nguồn dưỡng chất thuần khiết từ tự nhiên.</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary">Mua ngay sản phẩm</a>
+          <a href="#about" class="btn btn-secondary">Khám phá câu chuyện</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="hero-visual">
+          <img src="images/banner.jpg" alt="GreenGlow Organic Cosmetics" onerror="this.src='https://placehold.co/400x500?text=GreenGlow+Cosmetics'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="products">
+    <h2 class="section-title">Sản phẩm nổi bật</h2>
+    <p class="section-subtitle">Chăm sóc toàn diện với các dòng tinh chất chiết xuất hữu cơ tự nhiên.</p>
+    
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/sp-serum.jpg" alt="Serum Phục Hồi Rau Má" onerror="this.src='https://placehold.co/300x300?text=Serum+Rau+Ma'">
+        </div>
+        <div class="product-content">
+          <h3>Serum Phục Hồi B5 & Rau Má</h3>
+          <p>Làm dịu cấp tốc làn da nhạy cảm, phục hồi hàng rào bảo vệ da.</p>
+          <div class="price">350.000 đ</div>
+          <button class="btn btn-primary" onclick="addToCart('Serum Phục Hồi B5 & Rau Má', 350000)">Thêm vào giỏ</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/sp-kemduong.jpg" alt="Kem Dưỡng Ẩm Hoa Cúc" onerror="this.src='https://placehold.co/300x300?text=Kem+Duong+Hoa+Cuc'">
+        </div>
+        <div class="product-content">
+          <h3>Kem Dưỡng Ẩm Gel-Cream Hoa Cúc</h3>
+          <p>Cấp nước sâu 24h, chất kem mỏng nhẹ thấm nhanh không gây bí da.</p>
+          <div class="price">420.000 đ</div>
+          <button class="btn btn-primary" onclick="addToCart('Kem Dưỡng Ẩm Gel-Cream Hoa Cúc', 420000)">Thêm vào giỏ</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="images/sp-toner.jpg" alt="Toner BHA Trà Xanh" onerror="this.src='https://placehold.co/300x300?text=Toner+Tra+Xanh'">
+        </div>
+        <div class="product-content">
+          <h3>Toner Kiềm Dầu BHA Trà Xanh</h3>
+          <p>Cân bằng độ ẩm, làm sạch sâu lỗ chân lông và ngăn ngừa mụn.</p>
+          <div class="price">290.000 đ</div>
+          <button class="btn btn-primary" onclick="addToCart('Toner Kiềm Dầu BHA Trà Xanh', 290000)">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="about">
+    <div class="about-grid">
+      <div class="card">
+        <h3>Về Câu Chuyện Brand</h3>
+        <p>GreenGlow ra đời từ mong muốn tối giản hóa chu trình dưỡng da nhưng vẫn mang lại hiệu quả vượt trội. Chúng tôi loại bỏ hoàn toàn các thành phần có nguồn gốc động vật, chất bảo quản độc hại và hương liệu nhân tạo.</p>
+        <br>
+        <p>Mỗi sản phẩm GreenGlow gửi gắm triết lý sống xanh, gìn giữ sự cân bằng của cơ thể và bảo vệ môi trường bền vững cho tương lai.</p>
+      </div>
+      <div class="card" style="background: var(--cream);">
+        <h3>Cam Kết Từ GreenGlow</h3>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>🌱 Nguyên liệu 100% Thuần chay</strong>
+            <p>Chiết xuất từ thực vật hữu cơ trồng tại các nông trại đạt tiêu chuẩn quốc tế.</p>
+          </div>
+          <div class="feature-item">
+            <strong>🐰 Không thử nghiệm trên động vật</strong>
+            <p>Được chứng nhận nhân đạo bởi các tổ chức quốc tế uy tín.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="news">
+    <h2 class="section-title">Góc Làm Đẹp</h2>
+    <p class="section-subtitle">Cập nhật xu hướng chăm sóc da khoa học, lành mạnh.</p>
+    <div class="about-grid">
+      <div class="card" style="padding: 0; overflow:hidden;">
+        <img src="images/tin-tuc-1.jpg" alt="Skincare" style="width:100%; height:200px; object-fit:cover;" onerror="this.src='https://placehold.co/400x200?text=Skincare+Tips'">
+        <div style="padding:20px;">
+          <h4 style="color:var(--green-dark); margin-bottom:10px;">Chu Trình Skincare Tối Giản Cho Da Dầu Mụn Vào Mùa Hè</h4>
+          <p style="font-size:14px; color:var(--muted);">Bí quyết giữ làn da thông thoáng, hạn chế đổ dầu tối đa chỉ với 3 bước cơ bản...</p>
+        </div>
+      </div>
+      <div class="card" style="padding: 0; overflow:hidden;">
+        <img src="images/tin-tuc-2.jpg" alt="Mỹ phẩm thuần chay" style="width:100%; height:200px; object-fit:cover;" onerror="this.src='https://placehold.co/400x200?text=Vegan+Cosmetics'">
+        <div style="padding:20px;">
+          <h4 style="color:var(--green-dark); margin-bottom:10px;">Mỹ Phẩm Thuần Chay Là Gì? Tại Sao Nên Lựa Chọn?</h4>
+          <p style="font-size:14px; color:var(--muted);">Hiểu đúng về định nghĩa mỹ phẩm thuần chay (Vegan) và lợi ích tuyệt vời cho sức khỏe làn da...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="policy">
+    <h2 class="section-title">Chính sách mua hàng</h2>
+    <div class="policy-grid">
+      <div class="card">
+        <h3>🛡️ Chính Sách Bảo Hành</h3>
+        <p>Cam kết 100% sản phẩm chính hãng GreenGlow sản xuất. Đền bù gấp 5 lần nếu phát hiện sản phẩm không đúng cam kết chất lượng. Mọi sản phẩm khi giao tới khách hàng đều có hạn sử dụng trên 18 tháng.</p>
+      </div>
+      <div class="card">
+        <h3>🔄 Chính Sách Đổi Trả</h3>
+        <p>Đổi trả miễn phí 1-đổi-1 trong vòng 7 ngày kể từ khi đơn hàng giao thành công nếu sản phẩm có hiện tượng rỉ móp do vận chuyển, lỗi vòi xịt từ nhà sản xuất hoặc gây kích ứng da (Hỗ trợ thu hồi tận nhà).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="checkout">
+    <h2 class="section-title">Thông tin thanh toán</h2>
+    <p class="section-subtitle">Vui lòng kiểm tra lại giỏ hàng và điền thông tin giao nhận chính xác bên dưới.</p>
+    
+    <div class="checkout-grid">
+      <div class="card">
+        <h3>Thông Tin Giao Hàng</h3>
+        <form id="orderForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+          <div class="form-group">
+            <label>Họ và tên *</label>
+            <input type="text" name="Hoten" required placeholder="Nguyễn Văn A">
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại *</label>
+            <input type="tel" name="Sdt" required placeholder="09xxxxxxx">
+          </div>
+          <div class="form-group">
+            <label>Địa chỉ email nhận hóa đơn *</label>
+            <input type="email" name="_replyto" required placeholder="example@gmail.com">
+          </div>
+          <div class="form-group">
+            <label>Địa chỉ nhận hàng *</label>
+            <input type="text" name="Diachi" required placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
+          </div>
+          <div class="form-group">
+            <label>Ghi chú đơn hàng</label>
+            <textarea name="Ghichu" placeholder="Ghi chú về thời gian giao hàng, hướng dẫn tìm nhà..."></textarea>
+          </div>
+
+          <input type="hidden" name="Chi_Tiet_Don_Hang" id="hiddenCartData">
+          <input type="hidden" name="Tong_Tien" id="hiddenTotalData">
+
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px; padding:16px;">Xác Nhận Đặt Hàng</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Phương Thức Thanh Toán</h3>
+        <p style="font-size:14px; color:var(--muted); margin-bottom:15px;">Chọn hình thức phù hợp. Đối với ví điện tử, hệ thống sẽ hiển thị mã QR thanh toán tương ứng.</p>
+        
+        <div class="payment-methods">
+          <div class="payment-option">
+            <label>
+              <input type="radio" name="paymentMethod" value="COD" checked onclick="switchPayment('COD')">
+              <span>💵 Thanh toán khi nhận hàng (COD)</span>
+            </label>
+          </div>
+          
+          <div class="payment-option">
+            <label>
+              <input type="radio" name="paymentMethod" value="MOMO" onclick="switchPayment('MOMO')">
+              <span>🔮 Ví điện tử MoMo</span>
+            </label>
+            <div id="qr-momo" class="qr-area">
+              <p class="payment-note">Quét mã QR MoMo dưới đây để thanh toán:</p>
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=MoMo_Payment_Demo" alt="Momo QR">
+              <p style="font-size:12px; color:red; font-weight:bold;">Nội dung CK: [Số điện thoại của bạn]</p>
+            </div>
+          </div>
+
+          <div class="payment-option">
+            <label>
+              <input type="radio" name="paymentMethod" value="ZALOPAY" onclick="switchPayment('ZALOPAY')">
+              <span>💚 Ví ZaloPay</span>
+            </label>
+            <div id="qr-zalopay" class="qr-area">
+              <p class="payment-note">Quét mã QR ZaloPay để thanh toán:</p>
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ZaloPay_Demo" alt="ZaloPay QR">
+              <p style="font-size:12px; color:red; font-weight:bold;">Nội dung CK: [Số điện thoại của bạn]</p>
+            </div>
+          </div>
+
+          <div class="payment-option">
+            <label>
+              <input type="radio" name="paymentMethod" value="VISA" onclick="switchPayment('VISA')">
+              <span>💳 Thẻ Quốc tế Visa / Mastercard</span>
+            </label>
+            <div id="info-visa" class="qr-area">
+              <p class="payment-note" style="text-align: left;">Vui lòng chuyển khoản vào tài khoản Visa ngân hàng sau:</p>
+              <p style="text-align: left; font-weight: 700; margin-top:5px; color:var(--green-dark);">
+                Ngân hàng: Vietcombank<br>
+                STK: 001100xxxxxxx<br>
+                Chủ TK: NGUYEN VAN A
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h3>Giỏ hàng của bạn</h3>
+      <button class="close-cart" onclick="toggleCart(false)">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+      </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Tổng thanh toán:</span>
+        <span id="cart-total-price">0 đ</span>
+      </div>
+      <a href="#checkout" class="btn btn-primary" style="display:block;" onclick="toggleCart(false)">Tiến hành thanh toán</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>GreenGlow Cosmetics</h4>
+        <p style="margin-bottom:10px;">📍 Địa chỉ: 123 Đường Tên Lửa, Phường Bình Trị Đông B, Quận Bình Tân, TP. Hồ Chí Minh</p>
+        <p>🌿 Chăm sóc làn da thuần chay tinh khiết.</p>
+      </div>
+      <div class="footer-col">
+        <h4>⏰ Giờ Đội Ngũ Hỗ Trợ</h4>
+        <p>Thứ 2 - Thứ 6: 08:00 - 21:00</p>
+        <p>Thứ 7 - Chủ Nhật: 09:00
