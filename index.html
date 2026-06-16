@@ -1,243 +1,502 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlowBeauty - Mỹ Phẩm Chính Hãng</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #fdfbf7; color: #333; line-height: 1.6; }
-        
-        /* Navigation */
-        nav { background: #fff; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
-        nav .logo { font-size: 24px; font-weight: bold; color: #d4a373; text-decoration: none; }
-        nav ul { display: flex; list-style: none; gap: 20px; }
-        nav ul a { text-decoration: none; color: #555; font-weight: 500; transition: 0.3s; }
-        nav ul a:hover { color: #d4a373; }
-        .cart-icon { position: relative; cursor: pointer; font-size: 20px; color: #5c3d2e; }
-        .cart-count { position: absolute; top: -10px; right: -10px; background: #e76f51; color: #fff; font-size: 12px; padding: 2px 6px; border-radius: 50%; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenGlow - Mỹ Phẩm Thuần Chay</title>
+  <meta name="description" content="GreenGlow - Mỹ phẩm thuần chay với phong cách tinh giản, hiện đại và thân thiện với làn da." />
+  <style>
+    :root {
+      --green-dark: #1f4d3a;
+      --green-soft: #3f6f58;
+      --cream: #f6f1e8;
+      --white: #ffffff;
+      --text: #1e1e1e;
+      --muted: #6b6b6b;
+      --border: rgba(31, 77, 58, 0.12);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --max-width: 1200px;
+    }
 
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        section { margin-bottom: 60px; scroll-margin-top: 80px; }
-        h2 { text-align: center; color: #5c3d2e; margin-bottom: 30px; position: relative; }
-        h2::after { content: ''; display: block; width: 50px; height: 2px; background: #d4a373; margin: 10px auto 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
+    }
 
-        /* Products & Cart */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .product-card { background: #fff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #f0e6df; }
-        .product-img { width: 100%; height: 200px; background: #f4eae1; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: #a68a75; font-weight: bold; }
-        .price { color: #e76f51; font-weight: bold; font-size: 18px; margin: 10px 0; }
-        .btn { background: #d4a373; color: #fff; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
-        .btn:hover { background: #c29262; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* Checkout Form */
-        .checkout-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
-        .payment-methods label { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; cursor: pointer; }
+    body {
+      background: linear-gradient(180deg, #ffffff 0%, #f9f7f2 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-        /* Brand & Policy & News */
-        .brand-box, .policy-grid, .news-grid { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .policy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .news-item { border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        /* Footer & Contact */
-        footer { background: #5c3d2e; color: #fff; padding: 40px 5%; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .footer-sec h3 { color: #d4a373; margin-bottom: 15px; }
-        .social-icons a { color: #fff; font-size: 24px; margin-right: 15px; transition: 0.3s; }
-        .social-icons a:hover { color: #d4a373; }
-        .footer-bottom { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #745241; font-size: 14px; }
-    </style>
-</head>
-<body>
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-    <nav>
-        <a href="#" class="logo">GlowBeauty</a>
-        <ul>
-            <li><a href="#products">Sản Phẩm</a></li>
-            <li><a href="#brand">Về Brand</a></li>
-            <li><a href="#news">Tin Tức</a></li>
-            <li><a href="#policy">Chính Sách</a></li>
-            <li><a href="#checkout">Thanh Toán</a></li>
-        </ul>
-        <div class="cart-icon" onclick="scrollToCheckout()">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count" id="cart-count">0</span>
-        </div>
-    </nav>
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
 
-    <div class="container">
-        
-        <section id="products">
-            <h2>Sản Phẩm Bán Chạy</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="serum2.jpg" alt="serum2.jpg" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
-                    <h3>Serum Phục Hồi Da B5</h3>
-                    <p class="price">350.000 đ</p>
-                    <button class="btn" onclick="addToCart('Serum Phục Hồi Da B5', 350000)">Thêm vào giỏ</button>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">Kem Dưỡng Ẩm</div>
-                    <h3>Kem Dưỡng Ẩm Chuyên Sâu</h3>
-                    <p class="price">420.000 đ</p>
-                    <button class="btn" onclick="addToCart('Kem Dưỡng Ẩm Chuyên Sâu', 420000)">Thêm vào giỏ</button>
-                </div>
-            </div>
-        </section>
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(31, 77, 58, 0.08);
+      color: var(--green-dark);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
 
-        <section id="checkout">
-            <h2>Giỏ Hàng & Thanh Toán</h2>
-            <div class="checkout-container">
-                <div>
-                    <h3>Đơn hàng của bạn</h3>
-                    <div id="cart-items" style="margin: 20px 0;">
-                        <p style="color: #888;">Giỏ hàng đang trống...</p>
-                    </div>
-                    <p style="font-size: 18px; font-weight: bold;">Tổng tiền: <span id="cart-total" style="color: #e76f51;">0 đ</span></p>
-                </div>
-                
-                <div>
-                    <h3>Thông tin đặt hàng</h3>
-                    <form id="orderForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
-                        <div class="form-group">
-                            <label>Họ và Tên *</label>
-                            <input type="text" name="name" required placeholder="Nguyễn Văn A">
-                        </div>
-                        <div class="form-group">
-                            <label>Số điện thoại *</label>
-                            <input type="tel" name="phone" required placeholder="0901234567">
-                        </div>
-                        <div class="form-group">
-                            <label>Địa chỉ nhận hàng *</label>
-                            <input type="text" name="address" required placeholder="Số nhà, Tên đường, Tỉnh/Thành phố">
-                        </div>
-                        <div class="form-group">
-                            <label>Email (Nhận xác nhận đơn) *</label>
-                            <input type="email" name="_replyto" required placeholder="Customer@gmail.com">
-                        </div>
+    .section {
+      padding: 72px 0;
+    }
 
-                        <input type="hidden" name="Order_Details" id="hidden-order-details">
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: var(--green-dark);
+    }
 
-                        <div class="form-group payment-methods">
-                            <label><input type="radio" name="payment" value="COD" checked> 💵 Thanh toán khi nhận hàng (COD)</label>
-                            <label><input type="radio" name="payment" value="Momo"> 🔮 Ví MoMo (Quét mã QR)</label>
-                            <label><input type="radio" name="payment" value="ZaloPay"> 💚 Ví ZaloPay</label>
-                            <label><input type="radio" name="payment" value="Visa"> 💳 Thẻ Visa / Mastercard</label>
-                        </div>
-                        
-                        <button type="submit" class="btn" style="background: #e76f51;">Xác Nhận Đặt Hàng</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 34px;
+      font-size: 16px;
+    }
 
-        <section id="brand">
-            <h2>Về GlowBeauty</h2>
-            <div class="brand-box">
-                <p>Được thành lập từ tâm huyết mang lại vẻ đẹp tự nhiên và bền vững, <strong>GlowBeauty</strong> kiên định mang đến các dòng mỹ phẩm thuần chay, lành tính và đạt chuẩn y khoa. Chúng tôi tin rằng mỗi làn da đều xứng đáng được lắng nghe và nâng niu bằng những dưỡng chất tinh túy nhất từ thiên nhiên kết hợp khoa học hiện đại.</p>
-            </div>
-        </section>
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.8);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
 
-        <section id="news">
-            <h2>Cẩm Nang Làm Đẹp</h2>
-            <div class="news-grid">
-                <div class="news-item">
-                    <h4>❖ Quy trình 4 bước Skincare tối giản cho da dầu mụn</h4>
-                    <p style="font-size: 14px; color: #777; margin-top: 5px;">Bí quyết giữ làn da sạch sâu, kiềm dầu hiệu quả suốt 24h...</p>
-                </div>
-                <div class="news-item">
-                    <h4>❖ Serum B5 có thực sự thần thánh như lời đồn?</h4>
-                    <p style="font-size: 14px; color: #777; margin-top: 5px;">Phân tích khoa học về khả năng phục hồi lớp màng bảo vệ da...</p>
-                </div>
-            </div>
-        </section>
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
 
-        <section id="policy">
-            <h2>Chính Sách Của Chúng Tôi</h2>
-            <div class="policy-grid">
-                <div>
-                    <h4>🛡️ Chính sách Bảo Hành</h4>
-                    <p style="font-size: 14px; color: #555;">Cam kết 100% sản phẩm chính hãng. Phát hiện hàng giả đền 200%. Đảm bảo hạn sử dụng của sản phẩm luôn trên 12 tháng.</p>
-                </div>
-                <div>
-                    <h4>🔄 Chính sách Đổi Trả</h4>
-                    <p style="font-size: 14px; color: #555;">Đổi trả miễn phí trong vòng 7 ngày kể từ khi nhận hàng nếu sản phẩm bị lỗi do nhà sản xuất, bị móp méo khi vận chuyển hoặc gây kích ứng da (có chứng nhận y tế).</p>
-                </div>
-            </div>
-        </section>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--green-dark);
+      font-size: 20px;
+    }
 
-    </div>
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-sec">
-                <h3>GlowBeauty Shop</h3>
-                <p>📍 Địa chỉ: 123 Đường Tên Lửa, Quận 1, TP. Hồ Chí Minh</p>
-                <p>📞 Hotline: 1900 xxxx</p>
-            </div>
-            <div class="footer-sec">
-                <h3>⏰ Giờ Hỗ Trợ Khách Hàng</h3>
-                <p>Thứ 2 - Chủ Nhật: 08:00 - 21:30</p>
-                <p><i>(Hỗ trợ sự cố kỹ thuật/đổi trả 24/7 qua Zalo)</i></p>
-            </div>
-            <div class="footer-sec">
-                <h3>🔗 Kết Nối Với Chúng Tôi</h3>
-                <div class="social-icons" style="margin-top: 10px;">
-                    <a href="https://facebook.com/yourpage" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://zalo.me/yourphone" target="_blank" title="Zalo"><i class="fas fa-comment-dots"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 GlowBeauty. All rights reserved. Đã tích hợp hệ thống đặt hàng tự động.
-        </div>
-    </footer>
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-    <script>
-        let cart = [];
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
 
-        function addToCart(name, price) {
-            let item = cart.find(i => i.name === name);
-            if(item) {
-                item.quantity++;
-            } else {
-                cart.push({name, price, quantity: 1});
-            }
-            updateCart();
-            alert(`Đã thêm ${name} vào giỏ hàng!`);
-        }
+    .nav-links a {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+    }
 
-        function updateCart() {
-            let cartCount = 0;
-            let cartTotal = 0;
-            let cartItemsDiv = document.getElementById('cart-items');
-            
-            if(cart.length === 0) {
-                cartItemsDiv.innerHTML = '<p style="color: #888;">Giỏ hàng đang trống...</p>';
-            } else {
-                cartItemsDiv.innerHTML = '';
-                cart.forEach(item => {
-                    cartCount += item.quantity;
-                    cartTotal += (item.price * item.quantity);
-                    cartItemsDiv.innerHTML += `<p>• <strong>${item.name}</strong> x ${item.quantity} - ${(item.price * item.quantity).toLocaleString()} đ</p>`;
-                });
-            }
-            
-            document.getElementById('cart-count').innerText = cartCount;
-            document.getElementById('cart-total').innerText = cartTotal.toLocaleString() + " đ";
-            
-            // Cập nhật dữ liệu vào ô ẩn để gửi đi qua email
-            document.getElementById('hidden-order-details').value = JSON.stringify(cart) + " | Tổng: " + cartTotal + "đ";
-        }
+    .cart-button {
+background: var(--green-dark);
+      color: var(--white);
+      border: none;
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
 
-        function scrollToCheckout() {
-            document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
-</body>
-</html>
+    .hero {
+      padding: 70px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-card,
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-xl);
+    }
+
+    .hero-card {
+      padding: 48px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 1.05;
+      color: var(--green-dark);
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 28px;
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--green-dark);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #183c2d;
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--green-dark);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-side {
+      padding: 26px;
+    }
+
+    .hero-visual {
+      border-radius: 24px;
+      min-height: 420px;
+      background:
+        linear-gradient(160deg, rgba(246,241,232,0.95), rgba(255,255,255,0.9)),
+        radial-gradient(circle at top right, rgba(63,111,88,0.18), transparent 38%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .hero-visual .placeholder {
+      color: var(--green-dark);
+    }
+
+    .hero-visual h3 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .hero-visual p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .about-grid,
+    .checkout-grid,
+    .policy-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .feature-item {
+      padding: 16px;
+border-radius: var(--radius-md);
+      background: #f8faf7;
+      border: 1px solid var(--border);
+    }
+
+    .feature-item strong {
+      display: block;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-image {
+      height: 240px;
+      background: linear-gradient(180deg, #f7f3ea 0%, #eef5ef 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-soft);
+      font-weight: 700;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .product-content {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .product-content h3 {
+      font-size: 22px;
+      color: var(--green-dark);
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .product-content p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 380px;
+      max-width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(18px);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.12);
+      padding: 24px;
+      transition: right 0.35s ease;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-panel.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .cart-header h3 {
+      color: var(--green-dark);
+      font-size: 24px;
+    }
+
+    .close-cart {
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--green-dark);
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      display: grid;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .cart-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .cart-item h4 {
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .cart-item p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cart-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .cart-total {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 14px;
+    }
+
+    .empty-cart {
+      color: var(--muted);
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .checkout-form,
+    .payment-methods,
+    .policy-box,
+    .contact-box {
+      display: grid;
+      gap: 16px;
+    }
+.form-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--green-dark);
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      outline: none;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .payment-option {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .payment-option strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green-dark);
+    }
+
+    .payment-note {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .qr-placeholder {
+      border: 2px dashed rgba(31, 77, 58, 0.25);
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      background: #fafcf8;
+      marg
