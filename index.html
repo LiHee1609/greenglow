@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowBeauty - Mỹ Phẩm Chính Hãng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fdfbf7; color: #333; line-height: 1.6; }
+        
+        /* Navigation */
+        nav { background: #fff; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
+        nav .logo { font-size: 24px; font-weight: bold; color: #d4a373; text-decoration: none; }
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul a { text-decoration: none; color: #555; font-weight: 500; transition: 0.3s; }
+        nav ul a:hover { color: #d4a373; }
+        .cart-icon { position: relative; cursor: pointer; font-size: 20px; color: #5c3d2e; }
+        .cart-count { position: absolute; top: -10px; right: -10px; background: #e76f51; color: #fff; font-size: 12px; padding: 2px 6px; border-radius: 50%; }
+
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        section { margin-bottom: 60px; scroll-margin-top: 80px; }
+        h2 { text-align: center; color: #5c3d2e; margin-bottom: 30px; position: relative; }
+        h2::after { content: ''; display: block; width: 50px; height: 2px; background: #d4a373; margin: 10px auto 0; }
+
+        /* Products & Cart */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { background: #fff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #f0e6df; }
+        .product-img { width: 100%; height: 200px; background: #f4eae1; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: #a68a75; font-weight: bold; }
+        .price { color: #e76f51; font-weight: bold; font-size: 18px; margin: 10px 0; }
+        .btn { background: #d4a373; color: #fff; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
+        .btn:hover { background: #c29262; }
+
+        /* Checkout Form */
+        .checkout-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+        .payment-methods label { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; cursor: pointer; }
+
+        /* Brand & Policy & News */
+        .brand-box, .policy-grid, .news-grid { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .policy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .news-item { border-bottom: 1px solid #eee; padding-bottom: 15px; }
+
+        /* Footer & Contact */
+        footer { background: #5c3d2e; color: #fff; padding: 40px 5%; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .footer-sec h3 { color: #d4a373; margin-bottom: 15px; }
+        .social-icons a { color: #fff; font-size: 24px; margin-right: 15px; transition: 0.3s; }
+        .social-icons a:hover { color: #d4a373; }
+        .footer-bottom { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #745241; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">GlowBeauty</a>
+        <ul>
+            <li><a href="#products">Sản Phẩm</a></li>
+            <li><a href="#brand">Về Brand</a></li>
+            <li><a href="#news">Tin Tức</a></li>
+            <li><a href="#policy">Chính Sách</a></li>
+            <li><a href="#checkout">Thanh Toán</a></li>
+        </ul>
+        <div class="cart-icon" onclick="scrollToCheckout()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <section id="products">
+            <h2>Sản Phẩm Bán Chạy</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">Serum B5</div>
+                    <h3>Serum Phục Hồi Da B5</h3>
+                    <p class="price">350.000 đ</p>
+                    <button class="btn" onclick="addToCart('Serum Phục Hồi Da B5', 350000)">Thêm vào giỏ</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">Kem Dưỡng Ẩm</div>
+                    <h3>Kem Dưỡng Ẩm Chuyên Sâu</h3>
+                    <p class="price">420.000 đ</p>
+                    <button class="btn" onclick="addToCart('Kem Dưỡng Ẩm Chuyên Sâu', 420000)">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="checkout">
+            <h2>Giỏ Hàng & Thanh Toán</h2>
+            <div class="checkout-container">
+                <div>
+                    <h3>Đơn hàng của bạn</h3>
+                    <div id="cart-items" style="margin: 20px 0;">
+                        <p style="color: #888;">Giỏ hàng đang trống...</p>
+                    </div>
+                    <p style="font-size: 18px; font-weight: bold;">Tổng tiền: <span id="cart-total" style="color: #e76f51;">0 đ</span></p>
+                </div>
+                
+                <div>
+                    <h3>Thông tin đặt hàng</h3>
+                    <form id="orderForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+                        <div class="form-group">
+                            <label>Họ và Tên *</label>
+                            <input type="text" name="name" required placeholder="Nguyễn Văn A">
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại *</label>
+                            <input type="tel" name="phone" required placeholder="0901234567">
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ nhận hàng *</label>
+                            <input type="text" name="address" required placeholder="Số nhà, Tên đường, Tỉnh/Thành phố">
+                        </div>
+                        <div class="form-group">
+                            <label>Email (Nhận xác nhận đơn) *</label>
+                            <input type="email" name="_replyto" required placeholder="Customer@gmail.com">
+                        </div>
+
+                        <input type="hidden" name="Order_Details" id="hidden-order-details">
+
+                        <div class="form-group payment-methods">
+                            <label><input type="radio" name="payment" value="COD" checked> 💵 Thanh toán khi nhận hàng (COD)</label>
+                            <label><input type="radio" name="payment" value="Momo"> 🔮 Ví MoMo (Quét mã QR)</label>
+                            <label><input type="radio" name="payment" value="ZaloPay"> 💚 Ví ZaloPay</label>
+                            <label><input type="radio" name="payment" value="Visa"> 💳 Thẻ Visa / Mastercard</label>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="background: #e76f51;">Xác Nhận Đặt Hàng</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="brand">
+            <h2>Về GlowBeauty</h2>
+            <div class="brand-box">
+                <p>Được thành lập từ tâm huyết mang lại vẻ đẹp tự nhiên và bền vững, <strong>GlowBeauty</strong> kiên định mang đến các dòng mỹ phẩm thuần chay, lành tính và đạt chuẩn y khoa. Chúng tôi tin rằng mỗi làn da đều xứng đáng được lắng nghe và nâng niu bằng những dưỡng chất tinh túy nhất từ thiên nhiên kết hợp khoa học hiện đại.</p>
+            </div>
+        </section>
+
+        <section id="news">
+            <h2>Cẩm Nang Làm Đẹp</h2>
+            <div class="news-grid">
+                <div class="news-item">
+                    <h4>❖ Quy trình 4 bước Skincare tối giản cho da dầu mụn</h4>
+                    <p style="font-size: 14px; color: #777; margin-top: 5px;">Bí quyết giữ làn da sạch sâu, kiềm dầu hiệu quả suốt 24h...</p>
+                </div>
+                <div class="news-item">
+                    <h4>❖ Serum B5 có thực sự thần thánh như lời đồn?</h4>
+                    <p style="font-size: 14px; color: #777; margin-top: 5px;">Phân tích khoa học về khả năng phục hồi lớp màng bảo vệ da...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="policy">
+            <h2>Chính Sách Của Chúng Tôi</h2>
+            <div class="policy-grid">
+                <div>
+                    <h4>🛡️ Chính sách Bảo Hành</h4>
+                    <p style="font-size: 14px; color: #555;">Cam kết 100% sản phẩm chính hãng. Phát hiện hàng giả đền 200%. Đảm bảo hạn sử dụng của sản phẩm luôn trên 12 tháng.</p>
+                </div>
+                <div>
+                    <h4>🔄 Chính sách Đổi Trả</h4>
+                    <p style="font-size: 14px; color: #555;">Đổi trả miễn phí trong vòng 7 ngày kể từ khi nhận hàng nếu sản phẩm bị lỗi do nhà sản xuất, bị móp méo khi vận chuyển hoặc gây kích ứng da (có chứng nhận y tế).</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-sec">
+                <h3>GlowBeauty Shop</h3>
+                <p>📍 Địa chỉ: 123 Đường Tên Lửa, Quận 1, TP. Hồ Chí Minh</p>
+                <p>📞 Hotline: 1900 xxxx</p>
+            </div>
+            <div class="footer-sec">
+                <h3>⏰ Giờ Hỗ Trợ Khách Hàng</h3>
+                <p>Thứ 2 - Chủ Nhật: 08:00 - 21:30</p>
+                <p><i>(Hỗ trợ sự cố kỹ thuật/đổi trả 24/7 qua Zalo)</i></p>
+            </div>
+            <div class="footer-sec">
+                <h3>🔗 Kết Nối Với Chúng Tôi</h3>
+                <div class="social-icons" style="margin-top: 10px;">
+                    <a href="https://facebook.com/yourpage" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://zalo.me/yourphone" target="_blank" title="Zalo"><i class="fas fa-comment-dots"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 GlowBeauty. All rights reserved. Đã tích hợp hệ thống đặt hàng tự động.
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            let item = cart.find(i => i.name === name);
+            if(item) {
+                item.quantity++;
+            } else {
+                cart.push({name, price, quantity: 1});
+            }
+            updateCart();
+            alert(`Đã thêm ${name} vào giỏ hàng!`);
+        }
+
+        function updateCart() {
+            let cartCount = 0;
+            let cartTotal = 0;
+            let cartItemsDiv = document.getElementById('cart-items');
+            
+            if(cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p style="color: #888;">Giỏ hàng đang trống...</p>';
+            } else {
+                cartItemsDiv.innerHTML = '';
+                cart.forEach(item => {
+                    cartCount += item.quantity;
+                    cartTotal += (item.price * item.quantity);
+                    cartItemsDiv.innerHTML += `<p>• <strong>${item.name}</strong> x ${item.quantity} - ${(item.price * item.quantity).toLocaleString()} đ</p>`;
+                });
+            }
+            
+            document.getElementById('cart-count').innerText = cartCount;
+            document.getElementById('cart-total').innerText = cartTotal.toLocaleString() + " đ";
+            
+            // Cập nhật dữ liệu vào ô ẩn để gửi đi qua email
+            document.getElementById('hidden-order-details').value = JSON.stringify(cart) + " | Tổng: " + cartTotal + "đ";
+        }
+
+        function scrollToCheckout() {
+            document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
